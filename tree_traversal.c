@@ -56,7 +56,7 @@ void breadth_first (int * tree, int size);
 
 int * create_array (char * filename, int * size) {
 	FILE * stream = fopen(filename, "r");
-	char[] buffer = char[16];
+	char buffer [16];
 	int count = 0;
 
 	// find out how many entries are in the file
@@ -72,7 +72,7 @@ int * create_array (char * filename, int * size) {
 
 	// read from file
 	for (int i = 0; i < count; i++) {
-		fscanf("%d", arr + (i * sizeof(int)));
+		fscanf(stream, "  %d", arr + (i * sizeof(int)));
 	}
 
 	*size = count;
@@ -131,7 +131,7 @@ void postorder_helper (int * tree, int size, int cur_index) {
 
 void breadth_first (int * tree, int size) {
 	for (int i = 0; i < size; i++) {
-		printf ("%d\n", tree[cur_index]);
+		printf ("%d\n", tree[i]);
 	}
 }
 
@@ -147,6 +147,15 @@ int main() {
 	int * tree = create_array(filename, &size);
 
 	printf("filename: %s\n", filename);
+
+	printf("\nPre-Order Depth First Traversal\n");
+	preorder_depth_first(tree, size);
+
+	printf("\nIn-Order Depth First Traversal\n");
+	inorder_depth_first(tree, size);
+
+	printf("\nPost-Order Depth First Traversal\n");
+	postorder_depth_first(tree, size);
 
 
 	return 0;
